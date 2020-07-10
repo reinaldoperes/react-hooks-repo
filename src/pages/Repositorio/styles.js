@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {keyframes, css} from 'styled-components';
 import {Link} from 'react-router-dom';
 
 export const Container = styled.div`
@@ -36,12 +36,29 @@ export const Owner = styled.header`
     }
 `;
 
+
+//animação do loading
+const animacao = keyframes`
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+`;
 export const Loading = styled.div`
-    color: #FFF;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    ${
+        css`
+            svg{
+                animation: ${animacao} 2s linear infinite
+            }
+        `
+    }
 `;
 
 export const BackButton = styled(Link)`
@@ -108,4 +125,39 @@ export const IssuesList = styled.ul`
     }
 `;
 
-export const Pagination = styled.div``;
+export const Pagination = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button{
+        outline: 0;
+        border: 0;
+        background: #222;
+        color: #FFF;
+        padding: 5px 10px;
+        border-radius: 4px;
+
+        &:disabled{
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+    }
+`;
+
+export const Filters = styled.div`
+    margin: 15px 0;
+    
+    button{
+        outline: 0;
+        border: 0;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 0 3px;
+
+        &:nth-child(${props => props.active + 1}){
+            background: #0071db;
+            color: #FFF;
+        }
+    }
+`;
